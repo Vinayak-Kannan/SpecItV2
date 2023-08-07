@@ -27,50 +27,12 @@ export const PanelContent: React.FC<PanelContentProps> = ({
   fetchData,
   clearData,
 }) => (
-  <TabsState
-    initial="overview"
-    backgroundColor={convert(themes.normal).background.hoverable}
-  >
-    <div
-      id="overview"
-      title="Overview"
-      color={convert(themes.normal).color.positive}
-    >
-      <Placeholder>
-        <Fragment>
-          Test update. Addons can gather details about how a story is rendered. This is panel
-          uses a tab pattern. Click the button below to fetch data for the other
-          two tabs.
-        </Fragment>
-        <Fragment>
-          <RequestDataButton
-            secondary
-            small
-            onClick={fetchData}
-            style={{ marginRight: 16 }}
-          >
-            Request data
-          </RequestDataButton>
-
-          <RequestDataButton outline small onClick={clearData}>
-            Clear data
-          </RequestDataButton>
-        </Fragment>
-      </Placeholder>
-    </div>
-    <div
-      id="danger"
-      title={`${results.danger.length} Danger`}
-      color={convert(themes.normal).color.negative}
-    >
-      <List items={results.danger} />
-    </div>
-    <div
-      id="warning"
-      title={`${results.warning.length} Warning`}
-      color={convert(themes.normal).color.warning}
-    >
-      <List items={results.warning} />
-    </div>
-  </TabsState>
+  <div>
+    <h3>Figma Frame Update</h3>
+    <iframe
+      src={`https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FoAOpHRBu6Tj91ogYdeVXIY%2FComponents-Handoff%3Ftype%3Ddesign%26node-id%3D2%253A35666%26mode%3Ddesign%26t%3DoJsoyISrR2GdbYCf-1`}
+      style={{ width: "100%", height: "400px" }}
+      allowFullScreen
+    ></iframe>
+  </div>
 );

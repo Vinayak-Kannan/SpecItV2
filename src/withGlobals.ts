@@ -5,6 +5,8 @@ import type {
 } from "@storybook/types";
 import { useEffect, useGlobals } from "@storybook/preview-api";
 import { PARAM_KEY } from "./constants";
+import * as htmlToImage from "html-to-image";
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
 export const withGlobals = (
   StoryFn: StoryFunction<Renderer>,
@@ -33,29 +35,13 @@ export const withGlobals = (
   return StoryFn();
 };
 
-function displayToolState(selector: string, state: any) {
+const displayToolState = async (selector: string, state: any) => {
   const rootElements = document.querySelectorAll(selector);
-
-  rootElements.forEach((rootElement) => {
-    let preElement = rootElement.querySelector<HTMLPreElement>(
-      `${selector} pre`
-    );
-
-    if (!preElement) {
-      preElement = document.createElement("pre");
-      preElement.style.setProperty("margin-top", "2rem");
-      preElement.style.setProperty("padding", "1rem");
-      preElement.style.setProperty("background-color", "#eee");
-      preElement.style.setProperty("border-radius", "3px");
-      preElement.style.setProperty("max-width", "600px");
-      preElement.style.setProperty("overflow", "scroll");
-      rootElement.appendChild(preElement);
-    }
-
-    preElement.innerText = `This snippet is injected by the withGlobals decorator.
-It updates as the user interacts with the ⚡ or Theme tools in the toolbar above.
-
-${JSON.stringify(state, null, 2)}
-`;
-  });
-}
+  console.log(rootElements);
+  //@ts-ignore
+  const imageData = await htmlToImage.toPng(rootElements[0]);
+  console.log(imageData);
+  const img = new Image();
+  img.src = imageData;
+  document.body.appendChild(img);
+};
